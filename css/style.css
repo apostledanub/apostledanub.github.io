@@ -1,0 +1,432 @@
+/* Global page background */
+
+html {
+    background: #2F3136;
+    font-size: 1.25em;
+    color: #D3CFCD;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+/* css class to hide elements */
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
+/*  CSS for nav menu  */
+
+nav {
+    grid-column: 1 / 6;
+    grid-row: 1;
+    background: rgba(255, 0, 0, 0.5);
+    margin: 15px;
+    border: 2px solid black;
+}
+
+nav ul {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 4fr;
+}
+
+nav > ul > li {
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+nav > ul > li.active {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+nav > ul > li a {
+    text-decoration: none;
+    color: whitesmoke;
+    display: grid;
+    justify-content: center;
+}
+
+nav > ul > li:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    margin-top: 5px;
+    display: none;
+    position: absolute;
+    background: rgba(255, 0, 0, 0.5);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: whitesmoke;
+}
+
+.dropdown-content a:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* HOME PAGE */
+
+body.index {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+}
+
+main.index {
+    grid-column: 2 / 3;
+    grid-row-start: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+h1.index {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    text-align: center;
+}
+
+main.index h3 {
+    text-align: center;
+}
+
+#homeImg {
+    grid-column: 1/ 4;
+    display: grid;
+    justify-content: center;
+}
+
+#homeMainSection {
+    grid-column: 1/4;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#homeMainSection section {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #858280;
+    border-radius: 20px;
+    min-width: 300px;
+}
+
+#beschrijvingTitle {
+    flex: 100%;
+    text-align: center;
+}
+
+#beschrijving {
+    flex: 100%;
+}
+
+#mezelf, #waarom {
+    flex: 40%;
+}
+
+#homeTestimonials {
+    grid-column: 1/4;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#homeTestimonials article {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #858280;
+    border-radius: 20px;
+    flex: 20%;
+    min-width: 300px;
+}
+
+#testimonialTitle {
+    flex: 100%;
+    text-align: center;
+}
+
+/* CONTACT PAGE */
+
+body.contact {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+main.contact {
+    grid-column: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+h1.contact {
+    flex: 100%;
+    text-align: center;
+}
+
+#contactgegevens {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* PRODUCT PAGE */
+
+body.product {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+}
+
+h1.product {
+    grid-column: 2;
+    text-align: center;
+}
+
+main.product {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#productFilterWrapper {
+    flex: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#productFilter {
+    position: relative;
+}
+
+#productFilter button {
+    width: min-content;
+    font-size: 1.1em;
+    padding: 10px;
+    border: 4px solid black;
+    border-radius: 20px;
+    background-color: rgba(255, 0, 0, 0.5);
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+#productFilters {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.5);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#productFilters h4 {
+    color: black;
+    text-decoration: none;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+#productFilters input {
+    display: none;
+}
+
+#productFilters a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    border: 2px solid black;
+    margin: 2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#productFilters a.active {
+    background-color: white;
+}
+
+#productFilters a:hover {
+    background-color: #f1f1f1
+}
+
+#productFilter button:hover ~ #productFilters,
+#productFilters:hover {
+    display: flex;
+}
+
+#AcerSection {
+    flex: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+#AcerSection h2 {
+    flex-basis: 100%;
+    padding: 5px;
+    border-bottom: 3px solid #858280;
+}
+
+#AcerSection section {
+    border: 2px #858280 solid;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+#LenovoSection {
+    flex: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+#LenovoSection h2 {
+    flex-basis: 100%;
+    padding: 5px;
+    border-bottom: 3px solid #858280;
+}
+
+#LenovoSection section {
+    border: 2px #858280 solid;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+#AsusSection {
+    flex: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+#AsusSection h2 {
+    flex-basis: 100%;
+    padding: 5px;
+    border-bottom: 3px solid #858280;
+}
+
+#AsusSection section {
+    border: 2px #858280 solid;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+/* FAQ PAGE */
+
+body.faq {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+}
+
+h1.faq {
+    grid-column: 2;
+    display: grid;
+    justify-content: center;
+}
+
+main.faq {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#faqSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+#faqSection h2 {
+    flex: 100%;
+    text-align: center;
+}
+
+#faqSection section {
+    flex: 40%;
+    border: 2px #858280 solid;
+    border-radius: 15px;
+    padding: 15px;
+    min-width: 400px;
+}
+
+#faqSection section h3 {
+    border-bottom: 2px #858280 solid;
+}
+
+/* DETAIL PAGE */
+body.detail {
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+}
+
+h1.detail {
+    grid-column: 2;
+    text-align: center;
+}
+
+main.detail {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main.detail section.detailBreadcrumb {
+    flex: 100%
+}
+
+main.detail figure {
+}
+
+main.detail section.detailInfo {
+    flex: 20%;
+}
+
+main.detail section.detailBeschrijving {
+    flex: 35%
+}
+
+main.detail section.detailSpecificaties {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main.detail section.detailSpecificaties section {
+    flex: 50%;
+}
+
+main.detail section.detailSpecificaties h2 {
+    flex: 100%;
+    text-align: center;
+}
+
+main.detail table {
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #858280;
+}
+
+main.detail table td {
+    width: 1000px;
+}
+
+main.detail table tr:nth-child(even) {
+    background: dimgray;
+}
