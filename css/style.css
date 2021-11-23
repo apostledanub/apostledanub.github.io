@@ -9,10 +9,12 @@ html {
 
 /* css class to hide elements */
 
-.hidden {
-    visibility: hidden;
-    opacity: 0;
+.hidden { /* hide elements needed for document outline, but not for context, e.g. h1's */
     position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    left: -10000px;
 }
 
 /*  CSS for nav menu  */
@@ -25,10 +27,11 @@ nav {
     border: 2px solid black;
 }
 
-nav ul {
+nav > ul { /* make the navbar list a grid display and place it on the left side of the bar */
     list-style-type: none;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 4fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 4fr;
+    margin-right: 25px;
 }
 
 nav > ul > li {
@@ -38,33 +41,32 @@ nav > ul > li {
     margin-right: 5px;
 }
 
-nav > ul > li.active {
+nav > ul > li.active { /* if we're on the current page, turn the background of the corresponding li black */
     background: rgba(0, 0, 0, 0.8);
 }
 
 nav > ul > li a {
     text-decoration: none;
     color: whitesmoke;
-    display: grid;
+    display: flex;
     justify-content: center;
 }
 
-nav > ul > li:hover {
+nav > ul > li:hover { /* if we hover over a navbar item, make the background black */
     text-decoration: none;
     background: rgba(0, 0, 0, 0.8);
 }
 
-li.dropdown {
-    display: inline-block;
-}
+/* navbar dropdown menu css */
 
-.dropdown-content {
+.dropdown-content { /* lay-out for the actual dropdown menu */
     margin-top: 5px;
     display: none;
     position: absolute;
     background: rgba(255, 0, 0, 0.5);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
+    list-style-type: none;
 }
 
 .dropdown-content a {
@@ -78,7 +80,7 @@ li.dropdown {
     background: rgba(0, 0, 0, 0.8);
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content { /* hovering over the dropdown li shows the dropdown content */
     display: block;
 }
 
@@ -105,6 +107,8 @@ h1.index {
 main.index h3 {
     text-align: center;
 }
+
+/* place all items on the home page as shown in the wireframe */
 
 #homeImg {
     grid-column: 1/ 4;
@@ -168,21 +172,24 @@ body.contact {
 
 main.contact {
     grid-column: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
 }
 
 h1.contact {
-    flex: 100%;
+    grid-column: 1 / 3;
     text-align: center;
 }
 
+main.contact iframe {
+    grid-column: 1;
+}
+
 #contactgegevens {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    grid-column: 2;
+    text-align: center;
 }
 
 /* PRODUCT PAGE */
@@ -203,17 +210,36 @@ main.product {
     flex-wrap: wrap;
 }
 
-#productFilterWrapper {
+#dynButton {
+    background: rgba(255, 0, 0, 0.5);
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+}
+
+#dynButton:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* product filter dropdown menu */
+
+#productFilterWrapper { /* use a wrapper to place the filter button on the right side of the screen */
     flex: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-#productFilter {
+#productFilter { /* make the productfilter section position relative, needed to line up the dropdown menu under it */
     position: relative;
 }
 
-#productFilter button {
+#productFilter button { /* lay-out and look for the filter button itself */
     width: min-content;
     font-size: 1.1em;
     padding: 10px;
@@ -224,7 +250,7 @@ main.product {
     color: whitesmoke;
 }
 
-#productFilters {
+#productFilters { /* default display for the dropdown menu is none, high z-index to make it show up over other content */
     position: absolute;
     background: rgba(255, 0, 0, 0.5);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -232,6 +258,7 @@ main.product {
     display: none;
     flex-wrap: wrap;
     flex-direction: column;
+    right: 2px;
 }
 
 #productFilters h4 {
@@ -241,11 +268,7 @@ main.product {
     text-align: center;
 }
 
-#productFilters input {
-    display: none;
-}
-
-#productFilters a {
+#productFilters label {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -255,59 +278,62 @@ main.product {
     cursor: pointer;
 }
 
-#productFilters a.active {
-    background-color: white;
+/* filter logic */
+
+/* if a specific input is checked, make the corresponding label's background white to show it's selected */
+main.product input[id="all"]:checked ~ section label[for="all"] {
+    background-color: #f1f1f1;
 }
 
-#productFilters a:hover {
+main.product input[id="GB4"]:checked ~ section label[for="GB4"] {
+    background-color: #f1f1f1;
+}
+
+main.product input[id="GB8"]:checked ~ section label[for="GB8"] {
+    background-color: #f1f1f1;
+}
+
+main.product input[id="GB16"]:checked ~ section label[for="GB16"] {
+    background-color: #f1f1f1;
+}
+
+/* default display is none, so we can hide it for the filters later */
+main.product .all {
+    display: none;
+}
+
+/* if a filter is checked, make the corresponding classes show up */
+main.product input[id="all"]:checked ~ section .all {
+    display: block;
+}
+
+main.product input[id="GB4"]:checked ~ section .GB4 {
+    display: block;
+}
+
+main.product input[id="GB8"]:checked ~ section .GB8 {
+    display: block;
+}
+
+main.product input[id="GB16"]:checked ~ section .GB16 {
+    display: block;
+}
+
+main.product input { /* hide the input radio buttons */
+    display: none;
+}
+
+#productFilters label:hover { /* change background color to filter label on hover */
     background-color: #f1f1f1
 }
 
 #productFilter button:hover ~ #productFilters,
-#productFilters:hover {
+#productFilters:hover { /* when hovering over the filter button, or the dropdown menu, make the dropdown menu visible*/
     display: flex;
 }
 
-#AcerSection {
-    flex: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-#AcerSection h2 {
-    flex-basis: 100%;
-    padding: 5px;
-    border-bottom: 3px solid #858280;
-}
-
-#AcerSection section {
-    border: 2px #858280 solid;
-    border-radius: 15px;
-    padding: 15px;
-}
-
-#LenovoSection {
-    flex: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-#LenovoSection h2 {
-    flex-basis: 100%;
-    padding: 5px;
-    border-bottom: 3px solid #858280;
-}
-
-#LenovoSection section {
-    border: 2px #858280 solid;
-    border-radius: 15px;
-    padding: 15px;
-}
-
+#AcerSection,
+#LenovoSection,
 #AsusSection {
     flex: 100%;
     display: flex;
@@ -316,12 +342,16 @@ main.product {
     gap: 15px;
 }
 
+#AcerSection h2,
+#LenovoSection h2,
 #AsusSection h2 {
     flex-basis: 100%;
     padding: 5px;
     border-bottom: 3px solid #858280;
 }
 
+#AcerSection section,
+#LenovoSection section,
 #AsusSection section {
     border: 2px #858280 solid;
     border-radius: 15px;
@@ -388,11 +418,10 @@ main.detail {
     flex-wrap: wrap;
 }
 
+/* align the content on the page */
+
 main.detail section.detailBreadcrumb {
     flex: 100%
-}
-
-main.detail figure {
 }
 
 main.detail section.detailInfo {
@@ -400,7 +429,7 @@ main.detail section.detailInfo {
 }
 
 main.detail section.detailBeschrijving {
-    flex: 35%
+    flex: 35%;
 }
 
 main.detail section.detailSpecificaties {
@@ -429,4 +458,231 @@ main.detail table td {
 
 main.detail table tr:nth-child(even) {
     background: dimgray;
+}
+
+/* PERSONALISERING PAGE */
+body.personalisering {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+main.personalisering {
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+}
+
+h1.personalisering {
+    grid-column: 1 / 3;
+    text-align: center;
+}
+
+.personaliseringsform {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.personaliseringsform fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#naam, #email, #telefoonnummer, #leveringsadres, #logo_text { /* make the background of the text inputs dark */
+    width: min-content;
+    padding: 6px 10px;
+    border: 1px solid #d1cdcb;
+    background: #403e4c;
+    color: whitesmoke;
+}
+
+.personaliseringsform select {
+    background: rgba(255, 0, 0, 0.5);
+    color: whitesmoke;
+    padding: 5px;
+}
+
+.personaliseringsform optgroup {
+    background: #403e4c;
+    color: whitesmoke;
+    padding: 5px;
+}
+
+.bevestigingmail {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+#submit {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 30%;
+    align-self: center;
+    background: rgba(255, 0, 0, 0.5);
+    padding: 6px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: whitesmoke;
+    text-align: center;
+    cursor: pointer;
+}
+
+#submit:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* BEVESTIGING PAGE */
+body.bevestiging {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+main.bevestiging {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 80px;
+}
+
+/* NAV BAR RESPONSIVENESS */
+
+@media screen and (max-width: 1000px) {
+    /* when the screen becomes narrower, spread out the buttons over the full width instead of half */
+    nav > ul {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    /* when the screen becomes even narrower, place the buttons under each other instead of next to each other */
+    nav > ul {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+
+    nav > ul > li { /* add spacing between the buttons */
+        margin-top: 5px;
+    }
+}
+
+/* INDEX PAGE RESPONSIVENESS */
+
+/* resize the home image when the page becomes smaller */
+
+@media screen and (max-width: 650px) {
+    main.index img {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 525px) {
+    main.index img {
+        width: 300px;
+    }
+}
+
+/* CONTACT PAGE RESPONSIVENESS */
+
+@media screen and (max-width: 1180px) {
+    /* move the contact info under the map if the page is smaller than 1180px */
+    main.contact {
+        grid-template-columns: 1fr;
+    }
+
+    #contactgegevens {
+        grid-column: 1;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    /* make the map smaller on smaller screens */
+    main.contact iframe {
+        width: 500px;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    /* make the map even smaller on even smaller screens */
+    main.contact iframe {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* DETAIL PAGE RESPONSIVENESS */
+
+@media screen and (max-width: 700px) {
+    /* make the detail image smaller on smaller screens */
+    main.detail img {
+        width: 400px;
+    }
+
+    /* place info and beschrijven sections under each other on smaller screens */
+    main.detail section.detailInfo {
+        flex: 100%;
+    }
+
+    main.detail section.detailBeschrijving {
+        flex: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    /* make the detail image even smaller on even smaller screens */
+    main.detail img {
+        width: 300px;
+    }
+}
+
+/* PERSONALISERING PAGE RESPONSIVENESS */
+
+@media screen and (max-width: 770px) {
+    /* give the form more percentage of screen space on a smaller screen */
+    .personaliseringsform {
+        width: 80%;
+    }
+
+    /* force the select bar smaller, to prevent overflow */
+    .personaliseringsform select {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    /* force a min-width so all the fieldsets have the same width */
+    .personaliseringsform fieldset {
+        min-width: 390px;
+    }
+
+    /* make submit button more visible by increasing its size */
+    #submit {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .personaliseringsform fieldset {
+        min-width: 350px;
+    }
+
+    /* make text inputs smaller to prevent overflow */
+    #naam, #email, #telefoonnummer, #leveringsadres, #logo_text {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .personaliseringsform fieldset {
+        min-width: 300px;
+    }
+
+    #naam, #email, #telefoonnummer, #leveringsadres, #logo_text {
+        width: 250px;
+    }
 }

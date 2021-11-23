@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/normalize.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <title>CoolRed personalisering</title>
+    <script src="../script/form_validation.js"></script>
+</head>
+
+<body class="personalisering">
+
+<h1 class="personalisering">Personalisering</h1>
+
+<nav>
+    <h2 class="hidden">Menu</h2>
+    <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li class="dropdown">
+            <a href="producten.html">Producten</a>
+            <ul class="dropdown-content">
+                <li><a href="producten.html#AcerSection">Acer</a></li>
+                <li><a href="producten.html#LenovoSection">Lenovo</a></li>
+                <li><a href="producten.html#AsusSection">Asus</a></li>
+            </ul>
+        </li>
+        <li class="active"><a href="personalisering.html">Personaliseer</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+    </ul>
+</nav>
+
+<main class="personalisering">
+
+    <form action="bevestiging.html" method="get" class="personaliseringsform" target="_blank">
+
+        <fieldset>
+            <legend>Kies uw laptop</legend>
+            <label for="product">Kies een van de laptops die u wilt personaliseren.</label>
+            <select name="product" id="product">
+                <optgroup label="Acer">
+                    <option value="Acer Swift 3 SF314-511-55CA">Acer Swift 3 SF314-511-55CA</option>
+                    <option value="Acer Aspire 5 A515-55G-58U3">Acer Aspire 5 A515-55G-58U3</option>
+                    <option value="Acer Swift 1 SF114-33-P66Z">Acer Swift 1 SF114-33-P66Z</option>
+                    <option value="Acer Swift 1 SF114-32-P7FA">Acer Swift 1 SF114-32-P7FA</option>
+                    <option value="Acer Aspire 5 A515-56G-74M0">Acer Aspire 5 A515-56G-74M0</option>
+                    <option value="Acer Aspire 3 A317-53-58QA">Acer Aspire 3 A317-53-58QA</option>
+                    <option value="Acer Nitro 5 AN515-55-56VC">Acer Nitro 5 AN515-55-56VC</option>
+                </optgroup>
+
+                <optgroup label="Lenovo">
+                    <option value="Lenovo IdeaPad 3 82H800NFMH">Lenovo IdeaPad 3 82H800NFMH</option>
+                    <option value="Lenovo Ideapad 5 15ARE05">Lenovo Ideapad 5 15ARE05</option>
+                    <option value="Lenovo ThinkBook 15 20VE00FJMH">Lenovo ThinkBook 15 20VE00FJMH</option>
+                    <option value="Lenovo IdeaPad 3 82KU00CKMH">Lenovo IdeaPad 3 82KU00CKMH</option>
+                    <option value="Lenovo Legion 5 82JU0089MH">Lenovo Legion 5 82JU0089MH</option>
+                    <option value="Lenovo IdeaPad L340 81LL00EBPB">Lenovo IdeaPad L340 81LL00EBPB</option>
+                    <option value="Lenovo Thinkpad Yoga 11e">Lenovo Thinkpad Yoga 11e</option>
+                    <option value="Lenovo Yoga Slim 7 82A200AAMH">Lenovo Yoga Slim 7 82A200AAMH</option>
+                </optgroup>
+
+                <optgroup label="Asus">
+                    <option value="ASUS X515JA-EJ030T">ASUS X515JA-EJ030T</option>
+                    <option value="ASUS FX506LH-HN004T">ASUS FX506LH-HN004T</option>
+                    <option value="ASUS X415JA-EB498T">ASUS X415JA-EB498T</option>
+                    <option value="ASUS TUF Dash F15 FX516PM-HN024T">ASUS TUF Dash F15 FX516PM-HN024T</option>
+                    <option value="ASUS Notebook X415JA-EB646T">ASUS Notebook X415JA-EB646T</option>
+                </optgroup>
+
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Uw gegevens</legend>
+            <label for="aansprekingM"><input type="radio" name="aanspreking" id="aansprekingM" value="de heer"> de heer</label>
+            <label for="aansprekingV"><input type="radio" name="aanspreking" id="aansprekingV" value="mevrouw"> mevrouw</label>
+
+            <label for="naam">Geef uw naam:</label>
+            <input type="text" id="naam" name="naam" size="25" maxlength="50">
+            <span id="naamValidatie"></span>
+
+            <label for="email">Geef uw e-mailadres:</label>
+            <input type="email" id="email" name="email" size="30" maxlength="50">
+            <span id="emailValidatie"></span>
+
+            <label for="telefoonnummer">Geef uw telefoonnummer:</label>
+            <input type="tel" id="telefoonnummer" name="telefoonnummer" pattern="^0?[1-9][0-9]{7,8}$">
+
+            <label for="leveringsadres">Geef het leveringsadres:</label>
+            <input type="text" id="leveringsadres" name="leveringsadres" size="30" maxlength="50">
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Personalisering product</legend> <!-- bedrukking (tekst/foto), kleur, grootte, materiaal...  -->
+
+            <label for="logo">Logo</label>
+            <input type="file" id="logo" name="logo" accept="image/png, image/jpeg">
+
+            <label for="logo_text">Tekst onder logo</label>
+            <input type="text" id="logo_text" name="logo_text">
+
+            <label for="kleur">Kleur</label>
+            <input type="color" id="kleur" name="kleur">
+
+            <label for="materiaal">Materiaal</label>
+            <select name="materiaal" id="materiaal">
+                <optgroup label="Metaal">
+                    <option value="staal">Staal</option>
+                    <option value="aluminium">Aluminium</option>
+                </optgroup>
+                <optgroup label="Hout">
+                    <option value="mahonie">Mahonie</option>
+                    <option value="eik">Eik</option>
+                    <option value="ceder">Ceder</option>
+                </optgroup>
+            </select>
+
+        </fieldset>
+
+        <label for="bevestigingmail" class="bevestigingmail">
+            <input type="checkbox" id="bevestigingmail" name="bevestigingmail" value="ja">
+            Wenst u een bevestiging van uw bestelling via e-mail?
+        </label>
+        <input id="submit" type="submit" value="Bestel">
+        <span id="submitValidatie"></span>
+    </form>
+
+</main>
+
+</body>
+
+</html>
